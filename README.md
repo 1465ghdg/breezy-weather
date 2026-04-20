@@ -67,6 +67,9 @@ alt="Get it on F-Droid" align="center" height="80" /></a>
 
 <hr />
 
+> [!IMPORTANT]
+> 该分支与原仓库的区别：合并了 QWeather (和风天气) 数据源的支持
+
 <div align="center">
     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/01-main-header-light.png" alt="" style="width: 300px" />
     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/02-main-header-dark.png" alt="" style="width: 300px" />
