@@ -8,5 +8,5 @@ import java.util.Date
 data class QWeatherMinutelyPrecipitationProperties(
     @Serializable(DateSerializer::class) val fxTime: Date,
     val precip: String?,
-    val type: String?
+    val type: String?,
 )

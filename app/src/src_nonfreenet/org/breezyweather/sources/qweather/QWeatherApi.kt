@@ -73,5 +73,4 @@ interface QWeatherLocaleApi {
         @Query("number") number: Int,
         @Query("lang") lang: String,
     ): Observable<QWeatherLocationPOIResult>
-
 }

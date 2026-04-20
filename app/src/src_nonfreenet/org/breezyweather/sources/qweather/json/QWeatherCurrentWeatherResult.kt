@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class QWeatherCurrentWeatherResult(
     val code: String?,
-    val now: QWeatherInstantWeatherProperties?
+    val now: QWeatherInstantWeatherProperties?,
 )

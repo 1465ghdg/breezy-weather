@@ -21,5 +21,5 @@ data class QWeatherInstantWeatherProperties(
     val pressure: String?,
     val vis: String?,
     val cloud: String?,
-    val dew: String?
+    val dew: String?,
 )

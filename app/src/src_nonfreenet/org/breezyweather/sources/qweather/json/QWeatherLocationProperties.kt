@@ -14,5 +14,5 @@ data class QWeatherLocationProperties(
     val tz: String,
     val utcOffset: String?,
     val isDst: String?,
-    val type: String?
+    val type: String?,
 )

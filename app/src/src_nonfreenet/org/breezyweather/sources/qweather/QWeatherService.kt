@@ -35,7 +35,7 @@ import javax.inject.Inject
 
 class QWeatherService @Inject constructor(
     @ApplicationContext context: Context,
-    client: Retrofit.Builder
+    client: Retrofit.Builder,
 ) : HttpSource(), LocationSearchSource, ConfigurableSource, MainWeatherSource, ReverseGeocodingSource {
     override val id = "qweather"
     override val name = "和风天气"
@@ -53,8 +53,9 @@ class QWeatherService @Inject constructor(
     )
 
     override fun requestWeather(
-        context: Context, location: Location,
-        ignoreFeatures: List<SecondaryWeatherSourceFeature>
+        context: Context,
+        location: Location,
+        ignoreFeatures: List<SecondaryWeatherSourceFeature>,
     ): Observable<WeatherWrapper> {
         if (!isConfigured) {
             return Observable.error(ApiKeyMissingException())
@@ -98,7 +99,7 @@ class QWeatherService @Inject constructor(
                 curralerts: QWeatherAlertsResult,
                 hourly: QWeatherHourlyWeatherResult,
                 daily: QWeatherDailyWeatherResult,
-                minutely: QWeatherMinutelyPrecipitationResult
+                minutely: QWeatherMinutelyPrecipitationResult,
             ->
             convert(
                 currweather,
@@ -112,7 +113,8 @@ class QWeatherService @Inject constructor(
     }
 
     override fun requestLocationSearch(
-        context: Context, query: String
+        context: Context,
+        query: String,
     ): Observable<List<Location>> {
         val locationList: MutableList<Location> = ArrayList()
         val citysearchresults = localeApi.getCitySearch(
@@ -146,19 +148,35 @@ class QWeatherService @Inject constructor(
                 citysearch: QWeatherLocationCityResult,
                 poiscenicsearch: QWeatherLocationPOIResult,
                 poicstasearch: QWeatherLocationPOIResult,
-                poitstasearch: QWeatherLocationPOIResult
+                poitstasearch: QWeatherLocationPOIResult,
             ->
-            if (citysearch.code != "404" && citysearch.code != "204" && citysearch.code != "402") citysearch.location?.forEach {
-                locationList.add(convert(it))
+            if (citysearch.code != "404" && citysearch.code != "204" &&
+                citysearch.code != "402"
+            ) {
+                citysearch.location?.forEach {
+                    locationList.add(convert(it))
+                }
             }
-            if (poiscenicsearch.code != "404" && poiscenicsearch.code != "204" && poiscenicsearch.code != "402") poiscenicsearch.poi?.forEach {
-                locationList.add(convert(it))
+            if (poiscenicsearch.code != "404" && poiscenicsearch.code != "204" &&
+                poiscenicsearch.code != "402"
+            ) {
+                poiscenicsearch.poi?.forEach {
+                    locationList.add(convert(it))
+                }
             }
-            if (poicstasearch.code != "404" && poicstasearch.code != "204" && poicstasearch.code != "402") poicstasearch.poi?.forEach {
-                locationList.add(convert(it))
+            if (poicstasearch.code != "404" && poicstasearch.code != "204" &&
+                poicstasearch.code != "402"
+            ) {
+                poicstasearch.poi?.forEach {
+                    locationList.add(convert(it))
+                }
             }
-            if (poitstasearch.code != "404" && poitstasearch.code != "204" && poitstasearch.code != "402") poitstasearch.poi?.forEach {
-                locationList.add(convert(it))
+            if (poitstasearch.code != "404" && poitstasearch.code != "204" &&
+                poitstasearch.code != "402"
+            ) {
+                poitstasearch.poi?.forEach {
+                    locationList.add(convert(it))
+                }
             }
             locationList
         }
@@ -166,7 +184,7 @@ class QWeatherService @Inject constructor(
 
     override fun requestReverseGeocodingLocation(
         context: Context,
-        location: Location
+        location: Location,
     ): Observable<List<Location>> {
         return localeApi.getCitySearch(
             "${location.longitude},${location.latitude}",
@@ -199,7 +217,6 @@ class QWeatherService @Inject constructor(
             .create(QWeatherApi::class.java)
     }
 
-
     private val config = SourceConfigStore(context, id)
     private var apikey: String
         set(value) {
@@ -224,7 +241,7 @@ class QWeatherService @Inject constructor(
                 onValueChanged = {
                     apikey = it
                 }
-            ),
+            )
         )
     }
 

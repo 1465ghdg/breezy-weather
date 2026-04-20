@@ -23,7 +23,7 @@ import org.breezyweather.sources.qweather.json.QWeatherMinutelyPrecipitationResu
 import java.util.TimeZone
 
 fun convert(
-    result: QWeatherLocationProperties
+    result: QWeatherLocationProperties,
 ): Location {
     return Location(
         cityId = if (result.type == "city") result.id else null,
@@ -43,7 +43,7 @@ fun convert(
     alerts: QWeatherAlertsResult,
     hourlyweather: QWeatherHourlyWeatherResult,
     dailyweather: QWeatherDailyWeatherResult,
-    minutelyPrecipitationResult: QWeatherMinutelyPrecipitationResult
+    minutelyPrecipitationResult: QWeatherMinutelyPrecipitationResult,
 ): WeatherWrapper {
     return WeatherWrapper(
         current = currentweather.now?.let { now ->
@@ -83,11 +83,11 @@ fun convert(
                 weatherCode = getWeatherCode(it.icon),
                 temperature = Temperature(
                     temperature = it.temp?.toDoubleOrNull(),
-                    realFeelTemperature = it.feelsLike?.toDoubleOrNull(),
+                    realFeelTemperature = it.feelsLike?.toDoubleOrNull()
                 ),
                 wind = Wind(
                     speed = it.windSpeed?.toDoubleOrNull(),
-                    degree = it.wind360?.toDoubleOrNull(),
+                    degree = it.wind360?.toDoubleOrNull()
                 ),
                 relativeHumidity = it.humidity?.toDoubleOrNull(),
                 dewPoint = it.dew?.toDoubleOrNull(),
@@ -108,7 +108,7 @@ fun convert(
                     wind = Wind(
                         speed = it.windSpeedDay?.toDoubleOrNull(),
                         degree = it.wind360Day?.toDoubleOrNull()
-                    ),
+                    )
                 ),
                 night = HalfDay(
                     weatherText = it.textNight,
@@ -120,7 +120,7 @@ fun convert(
                     wind = Wind(
                         speed = it.windSpeedNight?.toDoubleOrNull(),
                         degree = it.wind360Night?.toDoubleOrNull()
-                    ),
+                    )
                 ),
                 degreeDay = DegreeDay(
                     heating = it.tempMax?.toDoubleOrNull(),
@@ -149,6 +149,7 @@ fun convert(
 
 private fun getWeatherCode(icon: String?): WeatherCode? {
     if (icon.isNullOrEmpty()) return null
+    @Suppress("ktlint:standard:max-line-length")
     return when (icon) {
         "100", "150" -> WeatherCode.PARTLY_CLOUDY
         "102", "103", "152", "153" -> WeatherCode.CLOUDY

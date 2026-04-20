@@ -31,5 +31,5 @@ data class QWeatherDayWeatherProperties(
     val precip: String?,
     val pressure: String?,
     val vis: String?,
-    val cloud: String?
+    val cloud: String?,
 )

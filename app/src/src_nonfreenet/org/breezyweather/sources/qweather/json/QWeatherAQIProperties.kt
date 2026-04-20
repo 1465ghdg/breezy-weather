@@ -13,5 +13,5 @@ data class QWeatherAQIProperties(
     val no2: String?,
     val so2: String?,
     val co: String?,
-    val o3: String?
+    val o3: String?,
 )
