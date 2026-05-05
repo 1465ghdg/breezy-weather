@@ -4,7 +4,13 @@
 - [Changelog for v4.x](docs/CHANGELOG_4.x.md)
 
 
-# Version 6.2.0 (not yet released)
+# Version 6.2.1 (not yet released)
+
+**Sources**
+- KNMI - Fix duplicate “Today” when migrating from another source
+
+
+# Version 6.2.0 (2026-05-01)
 
 **New features**
 - Add ability to disable the weather condition background on main screen. You can find it in Settings > Main screen.
@@ -24,6 +30,7 @@
 - ECCC - Fix missing alert title
 - FMI - Added as a new forecast, current, air quality, alert, normals source for Finland (@chunshek). Users on devices with hardened memory allocator (`hardened_malloc`) enabled, such as GrapheneOS may want to disable the feature for the app if they find the refresh to be too slow.
 - Gadgetbridge - Improved weather codes mapping
+- Gadgetbridge - Will now send again longitude, latitude and if it is current location with allowed apps
 - HKO - Add daily weather summary + add next hours summary + update existing ones (@chunshek)
 - Infoplaza - Added as a new worldwide forecast, current, minutely and normals source (@SKBotNL)
 - KNMI - Add textual representation of weather conditions (@willem640)
